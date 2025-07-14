@@ -1,0 +1,34 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.label {
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.input {
+  padding: 10px 12px;
+  border: 1.5px solid #bbb;
+  border-radius: 6px;
+  font-size: 16px;
+  outline: none;
+  background: #fff;
+  color: #222;
+  transition: border 0.2s;
+}
+
+.input:disabled {
+  background: #f4f4f4;
+}
+
+.inputError {
+  border: 1.5px solid #e57373;
+}
+
+.error {
+  color: #e57373;
+  font-size: 13px;
+}

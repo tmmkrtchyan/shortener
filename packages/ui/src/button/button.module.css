@@ -1,0 +1,28 @@
+.button {
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 0;
+  background: #635bff;
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.2s, background 0.2s;
+  opacity: 1;
+  min-width: 100px;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.copy {
+  background: #fff;
+  color: #635bff !important;
+  border: 1.5px solid #635bff;
+  font-weight: 500;
+  font-size: 15px;
+  padding: 6px 14px;
+  min-width: 100px;
+}

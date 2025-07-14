@@ -1,0 +1,59 @@
+---
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: api
+    working_dir: /app/apps/api
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/url-shortener?schema=public
+      - DOMAIN_URL=http://localhost:5000
+      - FRONT_URL=http://localhost:3000
+    networks:
+      - aurora_network
+    depends_on:
+      - postgres
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: web
+    working_dir: /app/apps/web
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_BASE_URL=http://localhost:5000
+    networks:
+      - aurora_network
+    depends_on:
+      - postgres
+
+  postgres:
+    container_name: postgres_db_url
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: url-shortener
+      PGDATA: /data/postgres-url
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres:/data/postgres-url
+    networks:
+      - aurora_network
+    restart: unless-stopped
+
+volumes:
+  postgres:
+
+networks:
+  aurora_network:
+    driver: bridge
